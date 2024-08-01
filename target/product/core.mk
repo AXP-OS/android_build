@@ -44,6 +44,7 @@ PRODUCT_PACKAGES += \
     Launcher3QuickStep \
     ManagedProvisioning \
     MtpDocumentsProvider \
+    PicoTts \
     PacProcessor \
     libpac \
     PrintSpooler \
