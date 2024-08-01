@@ -71,6 +71,7 @@ my_static_library_extra_packages := $(foreach l, $(call reverse-list,$(LOCAL_STA
 my_shared_library_resources := $(foreach l, $(LOCAL_SHARED_ANDROID_LIBRARIES),\
   $(call intermediates-dir-for,JAVA_LIBRARIES,$(l),,COMMON)/package-res.apk)
 
+$(my_res_package): PRIVATE_AAPT_FLAGS += --auto-add-overlay
 ifneq ($(my_static_library_resources),)
 $(my_res_package): PRIVATE_AAPT_FLAGS += --auto-add-overlay
 endif

@@ -529,6 +529,13 @@ def _BuildBootableImage(sourcedir, fs_config_file, info_dict=None,
     img_unsigned.close()
     img_keyblock.close()
 
+  # EXTENDROM: Magisk patcher
+  if (partition_name == "boot" and info_dict.get("init_boot") != "true") or partition_name == "init_boot":
+    mpatcher = [ 'vendor/extendrom/config/magisk/patch.sh', img.name ]
+    p = Run(mpatcher, verbose=True, env={'system_root_image': info_dict.get("system_root_image", "false")}, stdout=subprocess.PIPE)
+    p.communicate()
+    assert p.returncode == 0, "EXTENDROM: FATAL error %i occured!" % p.returncode
+
   # AVB: if enabled, calculate and add hash to boot.img or recovery.img.
   if info_dict.get("avb_enable") == "true":
     avbtool = os.getenv('AVBTOOL') or info_dict["avb_avbtool"]
