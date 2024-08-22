@@ -946,8 +946,9 @@ def ReplaceOtaKeys(input_tf_zip, output_tf_zip, misc_info):
       raise common.ExternalError(k + " does not exist or is not a file")
 
   mapped_keys = []
-  for k in keylist:
-    m = re.match(r"^(.*)\.x509\.pem$", k)
+  for kl in keylist:
+    k = kl.decode('ISO-8859-1')
+    m = re.match(r"^(.*)$", k)
     if not m:
       raise common.ExternalError(
           "can't parse \"%s\" from META/otakeys.txt" % (k,))
