@@ -1323,6 +1323,13 @@ def _BuildBootableImage(image_name, sourcedir, fs_config_file, info_dict=None,
     img_unsigned.close()
     img_keyblock.close()
 
+  # EXTENDROM: Magisk patch (build)
+  if (partition_name == "boot" and info_dict.get("init_boot") != "true") or partition_name == "init_boot":
+    top_dir = os.getenv('ANDROID_BUILD_TOP', os.environ.get('PWD'))
+    mpatcher = [ top_dir + '/vendor/extendrom/config/magisk/patch.sh', img.name , top_dir ]
+    logger.info("Patching (build): %s", img.name)
+    RunAndCheckOutput(mpatcher, verbose=True, env={'system_root_image': info_dict.get("system_root_image", "false")})
+
   # AVB: if enabled, calculate and add hash to boot.img or recovery.img.
   if info_dict.get("avb_enable") == "true":
     avbtool = info_dict["avb_avbtool"]
@@ -1358,6 +1365,19 @@ def GetBootableImage(name, prebuilt_name, unpack_dir, tree_subdir,
   the source files in 'unpack_dir'/'tree_subdir'."""
 
   prebuilt_path = os.path.join(unpack_dir, "BOOTABLE_IMAGES", prebuilt_name)
+
+  # EXTENDROM: Magisk patcher (prebuilt)
+  if (prebuilt_name == "boot.img" or prebuilt_name == "init_boot.img") and os.path.exists(prebuilt_path):
+    if info_dict is None:
+        info_dict = OPTIONS.info_dict
+    img = tempfile.NamedTemporaryFile()
+    top_dir = os.getenv('ANDROID_BUILD_TOP', os.environ.get('PWD'))
+    mpatcher = [ top_dir + '/vendor/extendrom/config/magisk/patch.sh', img.name , top_dir ]
+    shutil.copy(prebuilt_path, img.name)
+    logger.info("Patching (prebuilt): %s", img.name)
+    RunAndCheckOutput(mpatcher, verbose=True, env={'system_root_image': info_dict.get("system_root_image", "false")})
+    shutil.copy(img.name, prebuilt_path)
+
   if os.path.exists(prebuilt_path):
     logger.info("using prebuilt %s from BOOTABLE_IMAGES...", prebuilt_name)
     return File.FromLocalFile(name, prebuilt_path)
