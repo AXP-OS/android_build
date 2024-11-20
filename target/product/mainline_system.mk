@@ -22,7 +22,6 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_default.mk)
 $(call inherit-product-if-exists, vendor/google/security/adb/vendor_key.mk)
 
 # Enable updating of APEXes
-$(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
 
 # Shared java libs
 PRODUCT_PACKAGES += \
@@ -32,8 +31,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     LiveWallpapersPicker \
     PartnerBookmarksProvider \
-    PresencePolling \
-    RcsService \
     SafetyRegulatoryInfo \
     Stk \
     Tag \
