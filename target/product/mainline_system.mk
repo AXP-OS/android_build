@@ -30,8 +30,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     LiveWallpapersPicker \
     PartnerBookmarksProvider \
-    PresencePolling \
-    RcsService \
     SafetyRegulatoryInfo \
     Stk \
     Tag \
