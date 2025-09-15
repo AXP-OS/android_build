@@ -53,7 +53,6 @@ PRODUCT_PACKAGES += \
     libbundlewrapper \
     libclearkeycasplugin \
     libdownmix \
-    libdrmclearkeyplugin \
     libdynproc \
     libeffectproxy \
     libeffects \
