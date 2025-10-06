@@ -6001,6 +6001,11 @@ endif
 
 INSTALLED_MISC_INFO_TARGET := $(PRODUCT_OUT)/misc_info.txt
 
+# we need to encorce-include AXPs own BoardConfig here now.
+# while using the device tree's BoardConfig worked fine up to A13 this
+# does not work in all cases with A15 anymore.
+include vendor/axp/BoardConfigVendor.mk
+
 ifeq ($(TARGET_RELEASETOOLS_EXTENSIONS),)
 # default to common dir for device vendor
 tool_extensions := $(TARGET_DEVICE_DIR)/../common
