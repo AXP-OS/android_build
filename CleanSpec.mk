@@ -195,9 +195,7 @@ $(call add-clean-step, rm -rf $(OUT_DIR)/target/common/obj/JAVA_LIBRARIES/com.an
 $(call add-clean-step, rm -rf $(OUT_DIR)/target/common/obj/JAVA_LIBRARIES/com.android.omadm.plugin_intermediates)
 $(call add-clean-step, rm -rf $(OUT_DIR)/target/common/obj/JAVA_LIBRARIES/com.android.omadm.service.api_intermediates)
 $(call add-clean-step, rm -rf $(OUT_DIR)/target/common/obj/APPS/DMService_intermediates)
-$(call add-clean-step, rm -rf $(OUT_DIR)/target/common/obj/APPS/SprintDM_intermediates)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/priv-app/DMService.apk)
-$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/app/SprintDM.apk)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/omadm)
 
 # GCC 4.8
